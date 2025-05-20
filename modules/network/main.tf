@@ -26,6 +26,7 @@ resource "azurerm_nat_gateway" "nat" {
   resource_group_name = var.resource_group_name
   sku_name            = "Standard"
   public_ip_ids       = [azurerm_public_ip.public_ip.id]
+  
 }
 
 resource "azurerm_subnet_nat_gateway_association" "nat_assoc" {
@@ -42,6 +43,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.public_ip.id
+    public_ip_address_ids = [azurerm_public_ip.public_ip.id]
+
   }
 }
